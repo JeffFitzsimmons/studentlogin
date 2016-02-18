@@ -13,3 +13,14 @@ $('input#pid').keyup(function(event) {
 $(document).ready(function () {
     $('.selectpicker').selectpicker();
 });
+
+
+$(document).ready(function(){
+    $checks = $(":checkbox");
+    $checks.on('click', function() {
+        var string = $checks.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join(", ");
+        $('#classes').val(string);
+    });
+});
