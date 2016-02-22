@@ -1,13 +1,20 @@
 <?php
 date_default_timezone_set('America/Denver');
 
-$show_modal = false;
+// Connect to MySQL
+include ("dbLoginlocal.php");
+//include ("dbLogin.php");
+
+
+$check_logged_in = false;
+$show_login_modal = false;
+
 if (isset($_GET['loginfail'])) {
-    $show_modal = true;
+    $check_logged_in = true;
 }
 
 // Only process the form if $_POST isn't empty
-if ( ! empty( $_POST ) ) {
+if (!empty($_POST)) {
 
     // Get current date and time
     $date = date('Y-m-d H:i:s');
@@ -19,8 +26,6 @@ if ( ! empty( $_POST ) ) {
     if(isset($_POST['lectureLab']))
     $lectureLab = implode(',',$_POST['lectureLab']);
 
-    // Connect to MySQL
-    include ("dbLogin.php");
 
     // Check if student is logged in already
     $result = $mysqli->query("SELECT PID FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
@@ -44,6 +49,12 @@ if ( ! empty( $_POST ) ) {
         exit();
     }
 
+    // Get the login count from the students table for modal display que
+    $get_login_count = $mysqli->query("SELECT Login_Count FROM students WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'");
+
+    if ($get_login_count = '20') {
+        $show_login_modal = true;
+    }
 
     // Close connection
     $mysqli->close();
@@ -170,9 +181,9 @@ if ( ! empty( $_POST ) ) {
                                             </div>
                                         </li>
                                         <li class="list-group-item">
-                                            Advanced BIO
+                                            Advanced BIO Class
                                             <div class="material-switch pull-right">
-                                                <input type="checkbox" id="Advanced BIO" value="Advanced BIO"><label for="Advanced BIO" class="label-primary"></label>
+                                                <input type="checkbox" id="Advanced BIO" value="Advanced BIO"><label for="Advanced BIO Class" class="label-primary"></label>
                                             </div>
                                         </li>
                                     </ul>
@@ -211,9 +222,9 @@ if ( ! empty( $_POST ) ) {
                                             </div>
                                         </li>
                                         <li class="list-group-item">
-                                            Advanced CHEM
+                                            Advanced CHEM Class
                                             <div class="material-switch pull-right">
-                                                <input type="checkbox" id="Advanced CHEM" value="Advanced CHEM"><label for="Advanced CHEM" class="label-primary"></label>
+                                                <input type="checkbox" id="Advanced CHEM" value="Advanced CHEM"><label for="Advanced CHEM Class" class="label-primary"></label>
                                             </div>
                                         </li>
                                     </ul>
@@ -246,9 +257,9 @@ if ( ! empty( $_POST ) ) {
                                             </div>
                                         </li>
                                         <li class="list-group-item">
-                                            Advanced EN
+                                            Advanced EN Class
                                             <div class="material-switch pull-right">
-                                                <input type="checkbox" id="Advanced EN" value="Advanced EN"><label for="Advanced EN" class="label-primary"></label>
+                                                <input type="checkbox" id="Advanced EN" value="Advanced EN Class"><label for="Advanced EN" class="label-primary"></label>
                                             </div>
                                         </li>
                                     </ul>
@@ -313,7 +324,7 @@ if ( ! empty( $_POST ) ) {
 
 
             <label class="form-inline">Are you here for lecture, lab, or both?</label><br>
-            <select id="lectureLab" name="lectureLab[]" class="selectpicker show-tick" multiple title="Choose one or more..." required>
+            <select id="lectureLab" name="lectureLab[]" class="selectpicker show-tick" multiple title="Choose one or both..." required>
                 <option value="Lecture">Lecture</option>
                 <option value="Lab">Lab</option>
             </select>
@@ -338,6 +349,19 @@ if ( ! empty( $_POST ) ) {
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
+        <div id="loginCountModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4>Thanks for logging in! Please go to the front desk to claim your prize.</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
     </div> <!-- /container -->
 
     <!-- Javascript -->
@@ -346,8 +370,12 @@ if ( ! empty( $_POST ) ) {
     <script src="js/bootstrap-select.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php if($show_modal):?>
+    <?php if($check_logged_in):?>
         <script> $('#alertModal').modal('show');</script>
+    <?php endif;?>
+
+    <?php if($show_login_modal):?>
+        <script>$('#loginCountModal').modal('show');</script>
     <?php endif;?>
 
     <?php

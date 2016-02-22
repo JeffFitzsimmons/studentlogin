@@ -1,13 +1,18 @@
 <?php
 date_default_timezone_set('America/Denver');
 
-$show_modal = false;
+// Connect to MySQL
+include ("dbLoginlocal.php");
+//include ("dbLogin.php");
+
+
+$check_logged_in = false;
 if (isset($_GET['logoutfail'])) {
-    $show_modal = true;
+    $check_logged_in = true;
 }
 
 // Only process the form if $_POST isn't empty
-if ( ! empty( $_POST ) ) {
+if (!empty($_POST)) {
 
     // Get current date and time
     $date = date('Y-m-d H:i:s');
@@ -17,9 +22,6 @@ if ( ! empty( $_POST ) ) {
     $tutors = implode(',',$_POST['tutors']);
 
     $satisfied = $_POST['satisfied'];
-
-    // Connect to MySQL
-    include ("dbLogin.php");
 
 
     // Check if the student is not already logged out
@@ -152,7 +154,7 @@ if ( ! empty( $_POST ) ) {
     <script src="js/bootstrap-select.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php if($show_modal):?>
+    <?php if($check_logged_in):?>
         <script> $('#alertModal').modal('show');</script>
     <?php endif;?>
 
