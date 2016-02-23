@@ -5,7 +5,6 @@ date_default_timezone_set('America/Denver');
 include ("dbLoginlocal.php");
 //include ("dbLogin.php");
 
-
 $check_logged_in = false;
 $show_login_modal = false;
 
@@ -18,23 +17,35 @@ if (!empty($_POST)) {
 
     // Get current date and time
     $date = date('Y-m-d H:i:s');
+    $modifedDate = date('Y-m-d H:i:s', strtotime('-23 hours'));
 
     // Get values from multiselect dropdowns
     if(isset($_POST['reason']))
     $reason = implode(',',$_POST['reason']);
 
     if(isset($_POST['lectureLab']))
-    $lectureLab = implode(',',$_POST['lectureLab']);
+    $lecture_lab = implode(',',$_POST['lectureLab']);
 
+
+    $result_date = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No' AND Login_Time >= '$modifedDate'");
 
     // Check if student is logged in already
-    $result = $mysqli->query("SELECT PID FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
+    $result = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
     $check = mysqli_num_rows($result);
+    $check_date = mysqli_num_rows($result_date);
 
-    if ($check == 0) {
+
+    if ($check == 0 || $check_date == 0) {
+
+        if ($check_date == 0) {
+            $sql_fix_logout = "UPDATE Login SET Is_Logged_Out = 'Did not logout' WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'";
+            $update_logout = $mysqli->query($sql_fix_logout);
+        }
+
+
         // Insert data
         $sql = "INSERT INTO Login ( PID, Last_Name, Login_Time, Reason, Classes, Lecture_Lab, Is_Logged_Out )
-        VALUES ( '{$mysqli->real_escape_string($_POST['pid'])}', '{$mysqli->real_escape_string($_POST['lastName'])}', '$date', '$reason', '{$mysqli->real_escape_string($_POST['classes'])}', '$lectureLab', 'No' ) ";
+        VALUES ( '{$mysqli->real_escape_string($_POST['pid'])}', '{$mysqli->real_escape_string($_POST['lastName'])}', '$date', '$reason', '{$mysqli->real_escape_string($_POST['classes'])}', '$lecture_lab', 'No' ) ";
         $insert = $mysqli->query($sql);
 
         // Update login count for reward system
