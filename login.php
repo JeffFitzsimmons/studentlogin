@@ -5,11 +5,11 @@ date_default_timezone_set('America/Denver');
 include ("dbLoginlocal.php");
 //include ("dbLogin.php");
 
-$check_logged_in = false;
+$show_loginfail_modal = false;
 $show_login_modal = false;
 
 if (isset($_GET['loginfail'])) {
-    $check_logged_in = true;
+    $show_loginfail_modal = true;
 }
 
 // Only process the form if $_POST isn't empty
@@ -27,11 +27,12 @@ if (!empty($_POST)) {
     $lecture_lab = implode(',',$_POST['lectureLab']);
 
 
-    $result_date = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No' AND Login_Time >= '$modifedDate'");
-
     // Check if student is logged in already
     $result = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
     $check = mysqli_num_rows($result);
+
+    //Check if student did not log out more than a day ago
+    $result_date = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No' AND Login_Time >= '$modifedDate'");
     $check_date = mysqli_num_rows($result_date);
 
 
@@ -41,7 +42,6 @@ if (!empty($_POST)) {
             $sql_fix_logout = "UPDATE Login SET Is_Logged_Out = 'Did not logout' WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'";
             $update_logout = $mysqli->query($sql_fix_logout);
         }
-
 
         // Insert data
         $sql = "INSERT INTO Login ( PID, Last_Name, Login_Time, Reason, Classes, Lecture_Lab, Is_Logged_Out )
@@ -61,11 +61,9 @@ if (!empty($_POST)) {
     }
 
     // Get the login count from the students table for modal display que
-    $get_login_count = $mysqli->query("SELECT Login_Count FROM students WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'");
+    $check_login_count = $mysqli->query("SELECT Login_Count FROM students WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Login_Count = 20");
+    $get_login_count = mysqli_num_rows($check_login_count);
 
-    if ($get_login_count = '20') {
-        $show_login_modal = true;
-    }
 
     // Close connection
     $mysqli->close();
@@ -103,7 +101,7 @@ if (!empty($_POST)) {
 
     <div class="container">
 
-        <form class="form-signin" method="post" action="">
+        <form class="form-signin" method="post" action="" id="referenceSubmit">
 
             <div class="btn-group btn-group-lg btn-block">
                 <a href="login.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>
@@ -381,7 +379,7 @@ if (!empty($_POST)) {
     <script src="js/bootstrap-select.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php if($check_logged_in):?>
+    <?php if($show_loginfail_modal):?>
         <script> $('#alertModal').modal('show');</script>
     <?php endif;?>
 

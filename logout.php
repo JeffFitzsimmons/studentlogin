@@ -6,9 +6,9 @@ include ("dbLoginlocal.php");
 //include ("dbLogin.php");
 
 
-$check_logged_in = false;
+$show_loginfail_modal = false;
 if (isset($_GET['logoutfail'])) {
-    $check_logged_in = true;
+    $show_loginfail_modal = true;
 }
 
 // Only process the form if $_POST isn't empty
@@ -154,7 +154,7 @@ if (!empty($_POST)) {
     <script src="js/bootstrap-select.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php if($check_logged_in):?>
+    <?php if($show_loginfail_modal):?>
         <script> $('#alertModal').modal('show');</script>
     <?php endif;?>
 

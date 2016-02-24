@@ -24,3 +24,11 @@ $(document).ready(function(){
         $('#classes').val(string);
     });
 });
+
+
+$("#refrenceSubmit").submit(function(evt){
+
+    if($show_login_modal = true) {
+        $('#loginCountModal').modal('show');
+    }
+});
