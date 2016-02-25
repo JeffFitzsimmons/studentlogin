@@ -1,3 +1,19 @@
+$(document).ready(function () {
+    $('.selectpicker').selectpicker();
+});
+
+
+$(document).ready(function() {
+    $checks = $(":checkbox");
+    $checks.on('click', function() {
+        var string = $checks.filter(":checked").map(function(i,v){
+            return this.value;
+        }).get().join(", ");
+        $('#classes').val(string);
+    });
+});
+
+
 $('input#pid').keyup(function(event) {
     if (this.value.length == 6) {
         var pid = $('input#pid').val();
@@ -10,25 +26,13 @@ $('input#pid').keyup(function(event) {
 });
 
 
-$(document).ready(function () {
-    $('.selectpicker').selectpicker();
-});
-
-
-$(document).ready(function(){
-    $checks = $(":checkbox");
-    $checks.on('click', function() {
-        var string = $checks.filter(":checked").map(function(i,v){
-            return this.value;
-        }).get().join(", ");
-        $('#classes').val(string);
-    });
-});
-
-
-$("#refrenceSubmit").submit(function(evt){
-
-    if($show_login_modal = true) {
-        $('#loginCountModal').modal('show');
+$("input#pid").blur(function() {
+    var pid = $('input#pid').val();
+    if ($.trim(pid) != '') {
+        $.post('checkLoginCount.php', {pid: pid}, function(data) {
+            if (data % 20 == 0) {
+                $('#loginCountModal').modal('show');
+            }
+        });
     }
 });

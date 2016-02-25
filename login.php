@@ -5,8 +5,8 @@ date_default_timezone_set('America/Denver');
 include ("dbLoginlocal.php");
 //include ("dbLogin.php");
 
-$show_loginfail_modal = false;
 $show_login_modal = false;
+$show_loginfail_modal = false;
 
 if (isset($_GET['loginfail'])) {
     $show_loginfail_modal = true;
@@ -14,60 +14,7 @@ if (isset($_GET['loginfail'])) {
 
 // Only process the form if $_POST isn't empty
 if (!empty($_POST)) {
-
-    // Get current date and time
-    $date = date('Y-m-d H:i:s');
-    $modifedDate = date('Y-m-d H:i:s', strtotime('-23 hours'));
-
-    // Get values from multiselect dropdowns
-    if(isset($_POST['reason']))
-    $reason = implode(',',$_POST['reason']);
-
-    if(isset($_POST['lectureLab']))
-    $lecture_lab = implode(',',$_POST['lectureLab']);
-
-
-    // Check if student is logged in already
-    $result = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
-    $check = mysqli_num_rows($result);
-
-    //Check if student did not log out more than a day ago
-    $result_date = $mysqli->query("SELECT Login_Time FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No' AND Login_Time >= '$modifedDate'");
-    $check_date = mysqli_num_rows($result_date);
-
-
-    if ($check == 0 || $check_date == 0) {
-
-        if ($check_date == 0) {
-            $sql_fix_logout = "UPDATE Login SET Is_Logged_Out = 'Did not logout' WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'";
-            $update_logout = $mysqli->query($sql_fix_logout);
-        }
-
-        // Insert data
-        $sql = "INSERT INTO Login ( PID, Last_Name, Login_Time, Reason, Classes, Lecture_Lab, Is_Logged_Out )
-        VALUES ( '{$mysqli->real_escape_string($_POST['pid'])}', '{$mysqli->real_escape_string($_POST['lastName'])}', '$date', '$reason', '{$mysqli->real_escape_string($_POST['classes'])}', '$lecture_lab', 'No' ) ";
-        $insert = $mysqli->query($sql);
-
-        // Update login count for reward system
-        $sql_update = "UPDATE students SET Login_Count = Login_Count + 1
-        WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'
-        AND Last_Name = '{$mysqli->real_escape_string($_POST['lastName'])}' ";
-        $update = $mysqli->query($sql_update);
-
-    }
-    else {
-        header("Location: login.php?loginfail=true");
-        exit();
-    }
-
-    // Get the login count from the students table for modal display que
-    $check_login_count = $mysqli->query("SELECT Login_Count FROM students WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Login_Count = 20");
-    $get_login_count = mysqli_num_rows($check_login_count);
-
-
-    // Close connection
-    $mysqli->close();
-    header("Location: ./index.html");
+    include ("updateDatabase.php");
 }
 ?>
 
@@ -125,7 +72,6 @@ if (!empty($_POST)) {
                 <option value="Center Based Activity">PROPEL Activity</option>
             </select>
             <br><br>
-
 
             <label class="form-inline">What Class(es) are you here for today?</label><br>
             <input type="text" name="classes" id="classes" class="form-control" readonly><br>
@@ -339,37 +285,11 @@ if (!empty($_POST)) {
             </select>
             <br><br>
 
-            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit" name="submitLogin" onclick="checkLoginCount()"><span class="glyphicon glyphicon-log-in"></span> Login</button>
             <br><br>
 
             <a href="./index.html"><img src="img/main-logo.jpg" class="center-block"></img></a>
         </form>
-
-        <div id="alertModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h4>You have not logged out. Please logout before logging in again.</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-        <div id="loginCountModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h4>Thanks for logging in! Please go to the front desk to claim your prize.</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
 
     </div> <!-- /container -->
 
@@ -379,17 +299,14 @@ if (!empty($_POST)) {
     <script src="js/bootstrap-select.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php if($show_loginfail_modal):?>
-        <script> $('#alertModal').modal('show');</script>
-    <?php endif;?>
-
-    <?php if($show_login_modal):?>
-        <script>$('#loginCountModal').modal('show');</script>
-    <?php endif;?>
-
     <?php
+    include ("modals.php");
     include ("footer.php");
     ?>
+
+    <?php if($show_loginfail_modal):?>
+        <script> $('#loginFailModal').modal('show');</script>
+    <?php endif;?>
 
 </body>
 

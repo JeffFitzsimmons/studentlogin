@@ -8,6 +8,6 @@ if ($result = $mysqli->query($query)) {
     while ($row = $result->fetch_assoc()) {
         echo $row["Last_Name"];
     }
-
 }
+
 ?>

@@ -132,20 +132,6 @@ if (!empty($_POST)) {
             <a href="./index.html"><img src="img/main-logo.jpg" class="center-block"></img></a>
         </form>
 
-        <div id="alertModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h4>You have not logged in. Please login.</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-
     </div> <!-- /container -->
 
     <!-- Javascript -->
@@ -154,13 +140,16 @@ if (!empty($_POST)) {
     <script src="js/bootstrap-select.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php if($show_loginfail_modal):?>
-        <script> $('#alertModal').modal('show');</script>
-    <?php endif;?>
-
     <?php
         include ("footer.php");
+        include ("modals.php");
     ?>
+
+    <?php if($show_loginfail_modal):?>
+        <script> $('#logoutFailModal').modal('show');</script>
+    <?php endif;?>
+
+
 </body>
 
 </html>
