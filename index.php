@@ -12,7 +12,9 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+
+    <!-- Font Awesome core CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <!-- Custom styles -->
     <link href="css/custom.css" rel="stylesheet">
@@ -44,6 +46,10 @@
     <script src="js/jquery-1.12.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
+
+    <?php
+    include ("footer.php");
+    ?>
 
 </body>
 

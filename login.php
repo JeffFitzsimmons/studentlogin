@@ -34,6 +34,9 @@ if (!empty($_POST)) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
 
+    <!-- Font Awesome core CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
     <!-- Custom styles -->
     <link rel="stylesheet" href="css/custom.css">
 
@@ -57,9 +60,8 @@ if (!empty($_POST)) {
             <br><br>
 
             <h2 class="form-signin-heading text-center">Login</h2>
-            <label for="username" class="sr-only">Scan or Enter PID</label>
-            <input type="number" name="pid" id="pid" class="form-control" min="1" max="999999" placeholder="Scan/Manually Enter PID" required autofocus>
-            <label for="lastName" class="sr-only">Last Name</label>
+
+            <input type="number" name="pid" id="pid" class="form-control" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" required autofocus>
             <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name" required>
             <br>
 
@@ -82,11 +84,11 @@ if (!empty($_POST)) {
                     <div class="panel with-nav-tabs panel-primary">
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#Biology" data-toggle="tab">Biology</a></li>
-                                <li><a href="#Chemistry" data-toggle="tab">Chemistry</a></li>
-                                <li><a href="#Engineering" data-toggle="tab">Engineering</a></li>
-                                <li><a href="#Physics" data-toggle="tab">Physics</a></li>
-                                <li><a href="#Other" data-toggle="tab">Other</a></li>
+                                <li class="active"><a href="#Biology" data-toggle="tab"><span class="glyphicon glyphicon-leaf"></span> Biology</a></li>
+                                <li><a href="#Chemistry" data-toggle="tab"><i class="fa fa-flask"></i> Chemistry</a></li>
+                                <li><a href="#Engineering" data-toggle="tab"><i class="fa fa-cogs"></i> Engineering</a></li>
+                                <li><a href="#Physics" data-toggle="tab"><i class="fa fa-crop"></i> Physics</a></li>
+                                <li><a href="#Other" data-toggle="tab"><i class="fa fa-book"></i> Other</a></li>
                             </ul>
                         </div>
                         <div class="panel-body">
@@ -269,6 +271,12 @@ if (!empty($_POST)) {
                                                 <input type="checkbox" id="Earth Science" value="Earth Science"><label for="Earth Science" class="label-primary"></label>
                                             </div>
                                         </li>
+                                        <li class="list-group-item">
+                                            Other/Not Applicable
+                                            <div class="material-switch pull-right">
+                                                <input type="checkbox" id="OtherNA" value="Other"><label for="OtherNA" class="label-primary"></label>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -285,10 +293,10 @@ if (!empty($_POST)) {
             </select>
             <br><br>
 
-            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit" name="submitLogin" onclick="checkLoginCount()"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit" name="submitLogin"><span class="glyphicon glyphicon-log-in"></span> Login</button>
             <br><br>
 
-            <a href="./index.html"><img src="img/main-logo.jpg" class="center-block"></img></a>
+            <a href="./index.php"><img src="img/main-logo.jpg" class="center-block"></img></a>
         </form>
 
     </div> <!-- /container -->

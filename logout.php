@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 
     // Close connection
     $mysqli->close();
-    header("Location: ./index.html");
+    header("Location: ./index.php");
 }
 ?>
 
@@ -61,6 +61,9 @@ if (!empty($_POST)) {
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
+
+    <!-- Font Awesome core CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="css/custom.css">
@@ -86,7 +89,7 @@ if (!empty($_POST)) {
 
             <h2 class="form-signin-heading text-center">Logout</h2>
             <label for="username" class="sr-only">Scan or Enter PID</label>
-            <input type="number" name="pid" id="pid" class="form-control" min="1" max="999999" placeholder="Scan/Manually Enter PID" required autofocus>
+            <input type="number" name="pid" id="pid" class="form-control" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" required autofocus>
             <label for="lastName" class="sr-only">Last Name</label>
             <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name" required>
             <br>
@@ -129,7 +132,7 @@ if (!empty($_POST)) {
             <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
             <br><br>
 
-            <a href="./index.html"><img src="img/main-logo.jpg" class="center-block"></img></a>
+            <a href="./index.php"><img src="img/main-logo.jpg" class="center-block"></img></a>
         </form>
 
     </div> <!-- /container -->
