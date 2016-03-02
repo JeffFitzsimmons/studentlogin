@@ -18,16 +18,16 @@ $(document).ready(function() {
 
 // Prevents undesired input in Last Name field
 $("input#lastName").on("keydown", function(event){
-  // Allows necessary keys like backspace, tab, etc
-  var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
+    // Allows necessary keys like backspace, tab, etc
+    var arr = [8,9,16,17,20,35,36,37,38,39,40,45,46];
 
-  // Uppercase and lowercase letters
-  for(var i = 65; i <= 90; i++){
-    arr.push(i);
-  }
-  if(jQuery.inArray(event.which, arr) === -1){
-    event.preventDefault();
-  }
+    // Uppercase and lowercase letters
+    for(var i = 65; i <= 90; i++){
+        arr.push(i);
+    }
+    if(jQuery.inArray(event.which, arr) === -1){
+        event.preventDefault();
+    }
 });
 
 

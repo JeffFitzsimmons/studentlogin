@@ -51,7 +51,7 @@ if (!empty($_POST)) {
 
     <div class="container">
 
-        <form class="form-signin" method="post" action="" id="referenceSubmit">
+        <form class="form-signin" data-toggle="validator" method="post" action="">
 
             <div class="btn-group btn-group-lg btn-block">
                 <a href="login.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>
@@ -61,8 +61,15 @@ if (!empty($_POST)) {
 
             <h2 class="form-signin-heading text-center">Login</h2>
 
-            <input type="number" name="pid" id="pid" class="form-control" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" required autofocus>
-            <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name" required>
+            <div class="form-group has-feedback">
+                <input type="number" name="pid" id="pid" class="form-control" data-minlength="6" min="111111" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" pattern="\d*" required autofocus>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Last Name" patter="^[A-Za-z.\s_-]+$" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            </div>
             <br>
 
             <label class="form-inline">Reason(s) for visit: </label><br>
@@ -76,7 +83,9 @@ if (!empty($_POST)) {
             <br><br>
 
             <label class="form-inline">What Class(es) are you here for today?</label><br>
-            <input type="text" name="classes" id="classes" class="form-control" readonly><br>
+            <input type="text" name="classes" id="classes" class="form-control" readonly>
+            <br>
+
 
 
             <div class="row">
@@ -84,7 +93,7 @@ if (!empty($_POST)) {
                     <div class="panel with-nav-tabs panel-primary">
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#Biology" data-toggle="tab"><span class="glyphicon glyphicon-leaf"></span> Biology</a></li>
+                                <li class="active"><a href="#Biology" data-toggle="tab"><i class="fa fa-leaf"></i> Biology</a></li>
                                 <li><a href="#Chemistry" data-toggle="tab"><i class="fa fa-flask"></i> Chemistry</a></li>
                                 <li><a href="#Engineering" data-toggle="tab"><i class="fa fa-cogs"></i> Engineering</a></li>
                                 <li><a href="#Physics" data-toggle="tab"><i class="fa fa-crop"></i> Physics</a></li>
@@ -301,10 +310,13 @@ if (!empty($_POST)) {
 
     </div> <!-- /container -->
 
-    <!-- Javascript -->
+    <!-- Javascript for Bootstrap components-->
     <script src="js/jquery-1.12.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/validator.js"></script>
+
+    <!-- Custom Javascript-->
     <script src="js/custom.js"></script>
 
     <?php
