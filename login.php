@@ -314,6 +314,8 @@ if (!empty($_POST)) {
     <script src="js/jquery-1.12.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
+
+    <!-- Bootstrap validator for browsers without HTML5 validation support -->
     <script src="js/validator.js"></script>
 
     <!-- Custom Javascript-->

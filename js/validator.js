@@ -1,3 +1,6 @@
+// Validator that works with mobile browsers and Safari and shows users input problems 
+
+
 +function ($) {
     'use strict';
 
@@ -35,7 +38,7 @@
     Validator.INPUT_SELECTOR = ':input:not([type="submit"], button):enabled:visible'
 
     Validator.DEFAULTS = {
-        delay: 500,
+        delay: 200,
         html: false,
         disable: true,
         custom: {},
@@ -45,7 +48,7 @@
         },
         feedback: {
             success: 'glyphicon-ok',
-            error: 'glyphicon-remove'
+            error: 'glyphicon-alert'
         }
     }
 
