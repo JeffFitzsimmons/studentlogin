@@ -55,3 +55,9 @@ $("input#pid").blur(function() {
         });
     }
 });
+
+
+function resetCheckBox() {
+    $('input:checkbox').removeAttr('checked');
+    $('#classes').val('');
+}

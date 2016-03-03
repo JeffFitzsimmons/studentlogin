@@ -33,8 +33,8 @@
         <h1 >Welcome!</h1>
         <br>
         <div class="btn-group btn-group-lg btn-block">
-            <a href="login.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-            <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+            <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
+            <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
         <br><br>
 

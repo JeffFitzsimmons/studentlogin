@@ -5,7 +5,6 @@ date_default_timezone_set('America/Denver');
 include ("dbLoginlocal.php");
 //include ("dbLogin.php");
 
-$show_login_modal = false;
 $show_loginfail_modal = false;
 
 if (isset($_GET['loginfail'])) {
@@ -54,8 +53,8 @@ if (!empty($_POST)) {
         <form class="form-signin" data-toggle="validator" method="post" action="">
 
             <div class="btn-group btn-group-lg btn-block">
-                <a href="login.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
+                <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
             <br><br>
 
@@ -289,6 +288,7 @@ if (!empty($_POST)) {
                                     </ul>
                                 </div>
                             </div>
+                            <button class="btn btn-default" onclick="resetCheckBox()"><i class="fa fa-refresh"></i> Reset Classes</button>
                         </div><!-- /.panel-body -->
                     </div>
                 </div>
@@ -302,7 +302,7 @@ if (!empty($_POST)) {
             </select>
             <br><br>
 
-            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit" name="submitLogin"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit" name="submitLogin"><i class="fa fa-sign-in"></i> Login</button>
             <br><br>
 
             <a href="./index.php"><img src="img/main-logo.jpg" class="center-block"></img></a>

@@ -82,8 +82,8 @@ if (!empty($_POST)) {
         <form class="form-signin" data-toggle="validator" method="post" action="">
 
             <div class="btn-group btn-group-lg btn-block">
-                <a href="login.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
+                <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
             <br><br>
 
@@ -135,7 +135,7 @@ if (!empty($_POST)) {
             <textarea id="comments" name="comments" class="form-control" rows="5" placeholder="Add a comment here..."></textarea>
             <br><br>
 
-            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
+            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
             <br><br>
 
             <a href="./index.php"><img src="img/main-logo.jpg" class="center-block"></img></a>
