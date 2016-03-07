@@ -57,6 +57,7 @@ $("input#pid").blur(function() {
 });
 
 
+// Resets the checkboxes and checkbox text input
 function resetCheckBox() {
     $('input:checkbox').removeAttr('checked');
     $('#classes').val('');

@@ -20,29 +20,34 @@ $result = $mysqli->query("SELECT Login_Time FROM login WHERE PID = '{$mysqli->re
 $result_date = $mysqli->query("SELECT Login_Time FROM login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No' AND Login_Time >= '$modifedDate'");
 
 
-if ($result || $result_date) {
-    if ($result->num_rows === 0 || $result_date->num_rows === 0) {
-        if ($result_date->num_rows === 0) {
-            $sql_fix_logout = "UPDATE login SET Is_Logged_Out = 'Did not logout' WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'";
-            $update_logout = $mysqli->query($sql_fix_logout);
-        }
-
-        // Insert data
-        $sql = "INSERT INTO login ( PID, Last_Name, Login_Time, Reason, Classes, Lecture_Lab, Is_Logged_Out )
-        VALUES ( '{$mysqli->real_escape_string($_POST['pid'])}', '{$mysqli->real_escape_string($_POST['lastName'])}', '$date', '$reason', '{$mysqli->real_escape_string($_POST['classes'])}', '$lecture_lab', 'No' ) ";
-        $insert = $mysqli->query($sql);
-
-        // Update login count for reward system
-        $sql_update = "UPDATE students SET Login_Count = Login_Count + 1
-        WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'
-        AND Last_Name = '{$mysqli->real_escape_string($_POST['lastName'])}' ";
-        $update = $mysqli->query($sql_update);
-
+if ($result->num_rows === 0 || $result_date->num_rows === 0) {
+    if ($result_date->num_rows === 0) {
+        $sql_fix_logout = "UPDATE login SET Is_Logged_Out = 'Did not logout' WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'";
+        $update_logout = $mysqli->query($sql_fix_logout);
     }
-    else {
-        header("Location: login.php?loginfail=true");
-        exit();
+
+    // Insert data
+    $sql = "INSERT INTO login ( PID, Last_Name, Login_Time, Reason, Classes, Lecture_Lab, Is_Logged_Out )
+    VALUES ( '{$mysqli->real_escape_string($_POST['pid'])}', '{$mysqli->real_escape_string($_POST['lastName'])}', '$date', '$reason', '{$mysqli->real_escape_string($_POST['classes'])}', '$lecture_lab', 'No' ) ";
+    $insert = $mysqli->query($sql);
+
+    // Set Last Name for entries not currently in the students table
+    $check_student_last = $mysqli->query("SELECT Last_Name FROM students WHERE PID = '" .$mysqli->real_escape_string($_POST['pid']). "'");
+    if ($check_student_last->num_rows === 0) {
+        $insert_last = "INSERT INTO students ( PID, Last_Name )
+        VALUES ( '{$mysqli->real_escape_string($_POST['pid'])}', '{$mysqli->real_escape_string($_POST['lastName'])}' )";
+        $insert_last_sql = $mysqli->query($insert_last);
     }
+
+    // Update login count for reward system
+    $sql_update = "UPDATE students SET Login_Count = Login_Count + 1
+    WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'
+    AND Last_Name = '{$mysqli->real_escape_string($_POST['lastName'])}' ";
+    $update = $mysqli->query($sql_update);
+}
+else {
+    header("Location: login.php?loginfail=true");
+    exit();
 }
 
 

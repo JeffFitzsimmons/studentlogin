@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.png">
 
-    <title>Welcome</title>
+    <title>PROPEL Center</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -30,7 +30,7 @@
 
     <div class="container main-page-btn text-center">
 
-        <h1 >Welcome!</h1>
+        <h1 >Welcome to the PROPEL Center</h1>
         <br>
         <div class="btn-group btn-group-lg btn-block">
             <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
