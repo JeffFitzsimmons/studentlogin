@@ -25,19 +25,20 @@ if (!empty($_POST)) {
 
 
     // Check if the student is not already logged out
-    $result = $mysqli->query("SELECT PID FROM Login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
-    $check = mysqli_num_rows($result);
+    $result = $mysqli->query("SELECT PID FROM login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
 
-    if ($check != 0) {
-        // Update data if logged in
-        $sql_update = "UPDATE Login SET Satisfied = '$satisfied', Tutors = '$tutors', Comments = '{$mysqli->real_escape_string($_POST['comments'])}', Logout_Time = '$date', Is_Logged_Out = 'Done'
-        WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'
-        AND Is_Logged_Out = 'No'";
-        $update = $mysqli->query($sql_update);
-    }
-    else {
-        header("Location: logout.php?logoutfail=true");
-        exit();
+    if ($result) {
+        if ($result->num_rows != 0) {
+            // Update data if logged in
+            $sql_update = "UPDATE login SET Satisfied = '$satisfied', Tutors = '$tutors', Comments = '{$mysqli->real_escape_string($_POST['comments'])}', Logout_Time = '$date', Is_Logged_Out = 'Done'
+            WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'
+            AND Is_Logged_Out = 'No'";
+            $update = $mysqli->query($sql_update);
+        }
+        else {
+            header("Location: logout.php?logoutfail=true");
+            exit();
+        }
     }
 
     // Close connection
