@@ -129,6 +129,7 @@ if (!empty($_POST)) {
                 <option value="Mariana Hosomi">Mariana Hosomi</option>
                 <option value="Nick Goodall">Nick Goodall</option>
                 <option value="Philip Hopkins">Philip Hopkins</option>
+                <option value="N/A">Did not work with a tutor</option>
             </select>
             <br><br>
 
