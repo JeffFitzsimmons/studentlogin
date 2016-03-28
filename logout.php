@@ -140,7 +140,7 @@ if (!empty($_POST)) {
             <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
             <br><br>
 
-            <a href="./index.php"><img src="img/main-logo.jpg" class="center-block"></img></a>
+            <img src="img/main-logo.jpg" class="center-block"></img>
         </form>
 
     </div> <!-- /container -->
