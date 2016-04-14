@@ -61,7 +61,7 @@ if (!empty($_POST)) {
             <h2 class="form-signin-heading text-center">Login</h2>
 
             <div class="form-group has-feedback">
-                <input type="number" name="pid" id="pid" class="form-control" data-minlength="6" min="111111" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" pattern="\d*" required autofocus>
+                <input type="number" name="pid" id="pid" class="form-control" data-minlength="6" min="011111" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" pattern="\d*" required autofocus>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             </div>
 

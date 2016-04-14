@@ -23,17 +23,18 @@ if (!empty($_POST)) {
 
     $satisfied = $_POST['satisfied'];
 
+    $pid = mysqli_real_escape_string($mysqli, $_POST['pid']);
+    $comments = mysqli_real_escape_string($mysqli, $_POST['comments']);
 
     // Check if the student is not already logged out
-    $result = $mysqli->query("SELECT PID FROM login WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}' AND Is_Logged_Out = 'No'");
+    $result = mysqli_query($mysqli, "SELECT PID FROM login WHERE PID = '$pid' AND Is_Logged_Out = 'No'");
 
     if ($result) {
-        if ($result->num_rows != 0) {
+        if (mysqli_num_rows($result) != 0) {
             // Update data if logged in
-            $sql_update = "UPDATE login SET Satisfied = '$satisfied', Tutors = '$tutors', Comments = '{$mysqli->real_escape_string($_POST['comments'])}', Logout_Time = '$date', Is_Logged_Out = 'Done'
-            WHERE PID = '{$mysqli->real_escape_string($_POST['pid'])}'
-            AND Is_Logged_Out = 'No'";
-            $update = $mysqli->query($sql_update);
+            $sql_update = "UPDATE login SET Satisfied = '$satisfied', Tutors = '$tutors', Comments = '$comments', Logout_Time = '$date', Is_Logged_Out = 'Done'
+            WHERE PID = '$pid' AND Is_Logged_Out = 'No'";
+            $update = mysqli_query($mysqli, $sql_update);
         }
         else {
             header("Location: logout.php?logoutfail=true");
@@ -42,7 +43,7 @@ if (!empty($_POST)) {
     }
 
     // Close connection
-    $mysqli->close();
+    mysqli_close($mysqli);
     header("Location: ./index.php");
 }
 ?>
@@ -91,7 +92,7 @@ if (!empty($_POST)) {
             <h2 class="form-signin-heading text-center">Logout</h2>
 
             <div class="form-group has-feedback">
-                <input type="number" name="pid" id="pid" class="form-control" data-minlength="6" min="111111" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" pattern="\d*" required autofocus>
+                <input type="number" name="pid" id="pid" class="form-control" data-minlength="6" min="011111" max="999999" placeholder="Scan/Manually Enter PID" inputmode="numeric" pattern="\d*" required autofocus>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             </div>
 
