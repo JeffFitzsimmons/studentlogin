@@ -95,7 +95,7 @@ if (!empty($_POST)) {
                                 <li class="active"><a href="#Biology" data-toggle="tab"><i class="fa fa-leaf"></i> Biology</a></li>
                                 <li><a href="#Chemistry" data-toggle="tab"><i class="fa fa-flask"></i> Chemistry</a></li>
                                 <li><a href="#Engineering" data-toggle="tab"><i class="fa fa-cogs"></i> Engineering</a></li>
-                                <li><a href="#Physics" data-toggle="tab"><i class="fa fa-crop"></i> Physics</a></li>
+                                <li><a href="#Physics" data-toggle="tab"><i class="fa fa-cubes"></i> Physics</a></li>
                                 <li><a href="#Other" data-toggle="tab"><i class="fa fa-book"></i> Other</a></li>
                             </ul>
                         </div>

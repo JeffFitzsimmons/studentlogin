@@ -35,7 +35,7 @@ input::-webkit-inner-spin-button {
 }
 
 .form-signin {
-    max-width: 570px;
+    max-width: 600px;
     padding: 15px;
     margin: 0 auto;
 }
@@ -61,7 +61,7 @@ input::-webkit-inner-spin-button {
 }
 
 .main-page-btn {
-    max-width: 570px;
+    max-width: 600px;
     padding: 15px;
     margin: 0 auto;
 }

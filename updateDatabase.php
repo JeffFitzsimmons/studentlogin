@@ -2,8 +2,7 @@
 
 // Get current date and time
 $date = date('Y-m-d H:i:s');
-$modifedDate = date('Y-m-d H:i:s', strtotime('-23 hours'));
-
+$modifedDate = date('Y-m-d H:i:s', strtotime('-12 hours'));
 
 // Get values from multiselect dropdowns
 if(isset($_POST['reason']))
@@ -19,7 +18,7 @@ $classes = mysqli_real_escape_string($mysqli, $_POST['classes']);
 // Check if student is logged in already
 $result = mysqli_query($mysqli, "SELECT Login_Time FROM login WHERE PID = '$pid' AND Is_Logged_Out = 'No'");
 
-//Check if student did not log out more than a day ago
+//Check if student did not log out more than 12 hours ago
 $result_date = mysqli_query($mysqli, "SELECT Login_Time FROM login WHERE PID = '$pid' AND Is_Logged_Out = 'No' AND Login_Time >= '$modifedDate'");
 
 
