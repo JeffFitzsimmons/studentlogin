@@ -53,8 +53,8 @@ if (!empty($_POST)) {
         <form class="form-signin" data-toggle="validator" method="post" action="">
 
             <div class="btn-group btn-group-lg btn-block">
-                <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
-                <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
+                <a href="login.php" class="btn btn-primary col-xs-6 col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
+                <a href="logout.php" class="btn btn-primary col-xs-6 col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
             <br><br>
 
@@ -82,13 +82,13 @@ if (!empty($_POST)) {
             <br><br>
 
             <label class="form-inline">What Class(es) are you here for today?</label><br>
-            <input type="text" name="classes" id="classes" class="form-control" readonly>
+            <input type="text" name="classes" id="classes" class="form-control" readonly required>
             <br>
 
 
 
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-12">
                     <div class="panel with-nav-tabs panel-primary">
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">

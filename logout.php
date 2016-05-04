@@ -84,8 +84,8 @@ if (!empty($_POST)) {
         <form class="form-signin" data-toggle="validator" method="post" action="">
 
             <div class="btn-group btn-group-lg btn-block">
-                <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
-                <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
+                <a href="login.php" class="btn btn-primary col-xs-6 col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
+                <a href="logout.php" class="btn btn-primary col-xs-6 col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
             </div>
             <br><br>
 
@@ -104,10 +104,10 @@ if (!empty($_POST)) {
 
             <label class="form-inline">Where you satisfied with the outcome of your visit? </label>
             <div class="btn-group btn-block btn-group-lg" data-toggle="buttons">
-                <label class="btn btn-primary active col-sm-6">
+                <label class="btn btn-primary active col-xs-6 col-sm-6">
                     <input type="radio" name="satisfied" value="Yes" id="Yes" autocomplete="off" checked><span class="glyphicon glyphicon-thumbs-up"></span> Yes
                 </label>
-                <label class="btn btn-primary col-sm-6">
+                <label class="btn btn-primary col-xs-6 col-sm-6">
                     <input type="radio" name="satisfied" value="No" id="No" autocomplete="off"><span class="glyphicon glyphicon-thumbs-down"></span> No
                 </label>
             </div>

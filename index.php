@@ -28,18 +28,18 @@
 
 <body>
 
-    <div class="container main-page-btn text-center">
+    <div class="container">
+        <div class="form-signin">
+            <h1 class="text-center">Welcome to the PROPEL Center</h1>
+            <br>
+            <div class="btn-group btn-group-lg btn-block">
+                <a href="login.php" class="btn btn-primary col-xs-6 col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
+                <a href="logout.php" class="btn btn-primary col-xs-6 col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
+            </div>
+            <br><br>
 
-        <h1 >Welcome to the PROPEL Center</h1>
-        <br>
-        <div class="btn-group btn-group-lg btn-block">
-            <a href="login.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-in"></i> Login</a>
-            <a href="logout.php" class="btn btn-primary col-sm-6" role="button"><i class="fa fa-sign-out"></i> Logout</a>
+            <img src="img/main-logo.jpg" class="center-block"></img>
         </div>
-        <br><br>
-
-        <img src="img/main-logo.jpg" class="center-block"></img>
-
     </div> <!-- /container -->
 
     <!-- Javascript -->
