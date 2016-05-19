@@ -59,6 +59,11 @@ input::-webkit-inner-spin-button {
     z-index: 2;
 }
 
+.logoimg {
+    max-width: 100%;
+    height: auto;
+}
+
 .main-page-btn {
     max-width: 600px;
     margin: 0 auto;

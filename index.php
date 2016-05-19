@@ -38,7 +38,7 @@
             </div>
             <br><br>
         </div>
-        <img src="img/main-logo.jpg" class="center-block"></img>
+        <img src="img/main-logo.jpg" class="center-block logoimg"></img>
     </div> <!-- /container -->
 
     <!-- Javascript -->

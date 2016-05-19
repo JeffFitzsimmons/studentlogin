@@ -151,10 +151,12 @@ if (!empty($_POST)) {
             </div>
         </div>
 
-        <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
-        <br><br>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary center-block resize-btn" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
+            <br>
+        </div>
 
-        <img src="img/main-logo.jpg" class="center-block"></img>
+        <img src="img/main-logo.jpg" class="center-block logoimg"></img>
     </form>
 
 </div> <!-- /container -->
