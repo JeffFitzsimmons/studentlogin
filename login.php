@@ -280,6 +280,11 @@ if (!empty($_POST)) {
                                                 <input type="checkbox" id="Math Class" value="Math Class"><label for="Math Class">Math Class</label>
                                             </div>
                                         </li>
+                                        <li class="list-group-item">
+                                            <div class="checkbox checkbox-info checkbox-circle">
+                                                <input type="checkbox" id="GRE Prep" value="GRE Prep"><label for="GRE Prep">GRE Prep</label>
+                                            </div>
+                                        </li>
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <li class="list-group-item">
